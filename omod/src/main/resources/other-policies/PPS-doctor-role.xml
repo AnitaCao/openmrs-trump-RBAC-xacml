@@ -1,0 +1,130 @@
+<PolicySet xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:md="http://dot.rural.ac.uk/rbac/test/data/data_schema.xsd"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:3.0:core:schema:wd-­17  xacml-­core-­v3-­schema-­wd-­17.xsd"
+	PolicySetId="PPS:doctor:role" Version="1.0"
+	PolicyCombiningAlgId="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:permit-overrides">
+
+	<Description> PolicySet with permission for the doctor role !
+	</Description>
+	<Target>
+	
+	</Target>
+
+	<Policy PolicyId="Permissions:specifically:for:the:doctor:role"
+		Version="1.0"
+		RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:permit-overrides">
+		<Description> Policy with permission for the doctor role !  </Description>
+	  	<Target>     
+  	  	</Target>
+
+		<Rule RuleId="Permission:to:visit:patient" Effect="Permit">
+			<Description> Permission to visit an assigned patient</Description>
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">5</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:subject-category:subject" AttributeId="luca:tmac:subject-category:subject:id"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">get</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:permission-category:permission" AttributeId="luca:tmac:permission-category:permission:action"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">patients</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:permission-category:permission" AttributeId="luca:tmac:permission-category:permission:resource_type"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			
+			<Condition>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+						<AttributeDesignator MustBePresent="false"
+							Category="luca:tmac:subject-category:subject" AttributeId="luca:tmac:subject-category:subject:wanted_patient"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
+						<AttributeDesignator MustBePresent="false"
+							Category="luca:tmac:subject-category:subject" AttributeId="luca:tmac:subject-category:subject:assigned_patient"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
+					</Apply>
+			</Condition>	
+		</Rule>
+
+		
+		<!-- Permission for doctor anita to create patients -->
+		<Rule RuleId="Permission:to:create:patient" Effect="Permit">
+			<Description> Permission to visit an assigned patient</Description>
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">3</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:subject-category:subject" AttributeId="luca:tmac:subject-category:subject:id"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">get</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:permission-category:permission" AttributeId="luca:tmac:permission-category:permission:action"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">identifier types</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:permission-category:permission"
+								AttributeId="luca:tmac:permission-category:permission:resource_type"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+					</AllOf>
+				</AnyOf>
+			</Target>
+			
+		</Rule>
+		
+				<!-- Permission for doctor anita to save the created patients -->
+		<Rule RuleId="Permission:to:create:patient:sava" Effect="Permit">
+			<Description> Permission to visit an assigned patient</Description>
+			<Target>
+				<AnyOf>
+					<AllOf>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">3</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:subject-category:subject" AttributeId="luca:tmac:subject-category:subject:id"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+						<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">patients</AttributeValue>
+							<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:permission-category:permission"
+								AttributeId="luca:tmac:permission-category:permission:resource_type"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Match>
+						
+					</AllOf>
+				</AnyOf>
+			</Target>
+			<Condition>
+				<Apply
+					FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+					<AttributeDesignator MustBePresent="false"
+								Category="luca:tmac:permission-category:permission" AttributeId="luca:tmac:permission-category:permission:action"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+           				 <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">get</AttributeValue>
+           				 <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">add</AttributeValue>
+           				 <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">edit</AttributeValue>
+       			    </Apply>
+				</Apply>
+			</Condition>
+			
+		</Rule>
+	</Policy>
+</PolicySet>

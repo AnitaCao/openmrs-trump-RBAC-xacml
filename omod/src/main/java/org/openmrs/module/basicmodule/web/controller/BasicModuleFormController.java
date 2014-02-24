@@ -14,14 +14,20 @@
 package org.openmrs.module.basicmodule.web.controller;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.aopalliance.aop.Advice;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Patient;
+import org.openmrs.aop.AuthorizationAdvice;
+import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.context.ServiceContext;
+import org.springframework.aop.framework.Advised;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "module/basicmodule/basicmoduleLink.form")
 public class BasicModuleFormController{
+	
+	
 	
 	/** Logger for this class and subclasses */
 	protected final Log log = LogFactory.getLog(getClass());
@@ -85,5 +93,7 @@ public class BasicModuleFormController{
 		// that is defined in the @ModuleAttribute tag
 		return patients;
 	}
+	
+
 	
 }

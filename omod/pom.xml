@@ -44,6 +44,12 @@
 			<artifactId>openmrs-test</artifactId>
 			<type>pom</type>
 		</dependency>
+					<dependency>
+				<groupId>uk.ac.abdn.trump</groupId>
+				<artifactId>RA-TMAC-2</artifactId>
+				<version>2.0</version>
+				<scope>runtime</scope>
+			</dependency>
 	</dependencies>
 
 	<build>
@@ -173,4 +179,14 @@
 		</plugins>
 	</build>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>uk.ac.abdn.trump</groupId>
+				<artifactId>RA-TMAC-2</artifactId>
+				<version>2.0</version>
+				<scope>runtime</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

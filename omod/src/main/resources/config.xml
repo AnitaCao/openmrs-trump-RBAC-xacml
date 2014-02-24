@@ -19,11 +19,11 @@
 	
 	<require_version>${openMRSVersion}</require_version>
 	
-	<!-- Extensions -->
+	<!-- Extensions 
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
-	</extension>
+	</extension> -->
 	
 	
 	<!-- AOP
@@ -97,6 +97,12 @@
 		<file>messages_es.properties</file>
 	</messages>
 	<!-- /Internationalization -->
+	
+	<!-- NEEDS TO BE AN ADVICE BLOCK FOR EVERY SERVICE WE WANT TO XACML-IZE -->
+	<advice>
+		<point>org.openmrs.api.PatientService</point>
+		<class>org.openmrs.module.basicmodule.aop.AuthorizationAdvice</class>
+	</advice>
 	
 </module>
 
